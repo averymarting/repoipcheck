@@ -1,3 +1,16 @@
-- name: Check Runner IP and Country
-  run: |
-    curl -s https://ipinfo.io | jq '.'
+      - name: Display Runner IP and Country
+        run: |
+          echo "=== GitHub Runner Information ==="
+          
+          # Install jq if needed
+          sudo apt-get update -qq && sudo apt-get install -y jq > /dev/null
+          
+          # Get IP info
+          RESPONSE=$(curl -s https://ipinfo.io)
+          
+          echo "IP Address     : $(echo $RESPONSE | jq -r '.ip')"
+          echo "Country        : $(echo $RESPONSE | jq -r '.country')"
+          echo "City           : $(echo $RESPONSE | jq -r '.city')"
+          echo "Region         : $(echo $RESPONSE | jq -r '.region')"
+          echo "Organization   : $(echo $RESPONSE | jq -r '.org')"
+          echo "Timezone       : $(echo $RESPONSE | jq -r '.timezone')"
