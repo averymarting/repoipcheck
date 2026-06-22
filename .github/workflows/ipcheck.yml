@@ -1,0 +1,3 @@
+- name: Check Runner IP and Country
+  run: |
+    curl -s https://ipinfo.io | jq '.'
